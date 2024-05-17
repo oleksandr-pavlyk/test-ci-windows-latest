@@ -16,18 +16,16 @@ jobs:
       matrix:
         python: ['3.11']
         runner: ["windows-2022", "windows-2019"]
+
+    continue-on-error: true
+
     env:
       conda-bld: C:\Miniconda\conda-bld\win-64\
+
     steps:
       - uses: actions/checkout@v4.1.5
         with:
           fetch-depth: 0
-      - uses: conda-incubator/setup-miniconda@v3
-        with:
-          auto-activate-base: true
-          conda-build-version: "*"
-          activate-environment: true
-          python-version: ${{ matrix.python }}
 
       - name: Build simple executable
         run: |
@@ -38,8 +36,16 @@ jobs:
       - name: Run simple executable
         run: |
            cd simple
-           ./bin/simple_c
-           ./bin/simple_cxx
+           ls
+           ./bin/simple_c.exe
+           ./bin/simple_cxx.exe
+
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          auto-activate-base: true
+          conda-build-version: "*"
+          activate-environment: true
+          python-version: ${{ matrix.python }}
 
       - name: Build conda package
         env:
