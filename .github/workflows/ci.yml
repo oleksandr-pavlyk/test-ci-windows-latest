@@ -30,9 +30,9 @@ jobs:
 
       - name: Build simple executable
         run: |
-	   cd simple
-	   cmake . -B build -DCMAKE_INSTALL_PREFIX=.
-	   cmake --build build --target install
+           cd simple
+           cmake . -B build -DCMAKE_INSTALL_PREFIX=.
+           cmake --build build --target install
 
       - name: Build conda package
         env:
