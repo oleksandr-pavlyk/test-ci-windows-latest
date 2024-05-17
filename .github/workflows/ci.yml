@@ -37,8 +37,8 @@ jobs:
         run: |
            cd simple
            ls
-           ./bin/simple_c.exe
-           ./bin/simple_cxx.exe
+           /bin/simple_c.exe
+           /bin/simple_cxx.exe
 
       - uses: conda-incubator/setup-miniconda@v3
         with:
