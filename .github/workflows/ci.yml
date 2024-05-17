@@ -48,5 +48,5 @@ jobs:
           python-version: ${{ matrix.python }}
 
       - name: Build conda package
-        run: conda build --no-test --python ${{ matrix.python }} -c conda-forge --override-channels conda-recipe
+        run: conda build --python ${{ matrix.python }} -c conda-forge --override-channels conda-recipe
 

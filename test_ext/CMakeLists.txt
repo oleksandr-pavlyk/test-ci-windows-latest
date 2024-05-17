@@ -1,10 +1,14 @@
 cmake_minimum_required(VERSION 3.29 FATAL_ERROR)
 
-project(test_ext VERSION 0.1 LANGUAGES CXX DESCRIPTION "Example of test")
+project(
+   test_ext
+   VERSION 1
+   LANGUAGES CXX
+   DESCRIPTION "Example of test"
+)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-
 
 # Define CMAKE_INSTALL_xxx: LIBDIR, INCLUDEDIR
 include(GNUInstallDirs)
