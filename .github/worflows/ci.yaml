@@ -1,0 +1,48 @@
+name: Conda package
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+permissions: read-all
+
+env:
+  PACKAGE_NAME: dpctl
+  MODULE_NAME: dpctl
+  TEST_ENV_NAME: test_dpctl
+  VER_SCRIPT1: "import json; f = open('ver.json', 'r'); j = json.load(f); f.close(); "
+  VER_SCRIPT2: "d = j['dpctl'][0]; print('='.join((d[s] for s in ('version', 'build'))))"
+
+jobs:
+  build_windows:
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        python: ['3.11']
+    env:
+      conda-bld: C:\Miniconda\conda-bld\win-64\
+    steps:
+      - uses: actions/checkout@v4.1.5
+        with:
+          fetch-depth: 0
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          auto-activate-base: true
+          conda-build-version: "*"
+          activate-environment: true
+          python-version: ${{ matrix.python }}
+
+      - name: Build simple executable
+        run: |
+	   cd simple
+	   cmake . -B build -DCMAKE_INSTALL_PREFIX=.
+	   cmake --build build --target install
+
+      - name: Build conda package
+        env:
+          OVERRIDE_INTEL_IPO: 1   # IPO requires more resources that GH actions VM provides
+        run: conda build --no-test --python ${{ matrix.python }} -c intel -c conda-forge --override-channels conda-recipe
+
