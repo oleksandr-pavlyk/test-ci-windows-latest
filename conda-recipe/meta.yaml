@@ -1,23 +1,22 @@
 package:
-   name: test_ext
-   version: 1
+  name: test_ext
+  version: 1
 
 source:
-   path: ../test_ext
-
+  path: ../test_ext
 
 build:
-   number: 0
+  number: 0
 
 requirements:
-    build:
-        - {{ compiler('cxx') }}
-	- {{ compiler('c') }}
-    host:
-       - cmake
-       - ninja
-       - scikit-build
-       - python
-    run:
-       - python
+  build:
+    - {{ compiler('cxx') }}
+    - {{ compiler('c') }}
+  host:
+    - cmake
+    - ninja
+    - scikit-build
+    - python
+  run:
+    - python
    
