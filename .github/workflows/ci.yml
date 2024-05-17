@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         python: ['3.11']
-	runner: ["windows-2022", "windows-2019"]
+        runner: ["windows-2022", "windows-2019"]
     env:
       conda-bld: C:\Miniconda\conda-bld\win-64\
     steps:
