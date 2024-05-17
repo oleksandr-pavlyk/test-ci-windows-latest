@@ -31,14 +31,15 @@ jobs:
         run: |
            cd simple
            cmake . -B build -DCMAKE_INSTALL_PREFIX=.
-           cmake --build build --target install
+           cmake --build build
 
       - name: Run simple executable
         run: |
            cd simple
            ls
-           ./bin/simple_c.exe
-           ./bin/simple_cxx.exe
+           ls build
+           ./build/simple_c.exe
+           ./build/simple_cxx.exe
 
       - uses: conda-incubator/setup-miniconda@v3
         with:
