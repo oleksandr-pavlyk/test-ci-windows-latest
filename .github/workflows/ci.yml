@@ -42,11 +42,14 @@ jobs:
 
       - uses: conda-incubator/setup-miniconda@v3
         with:
-          mambaforge-version: "24.3.0"
+          miniconda-version: latest
           conda-build-version: "*"
-          activate-environment: true
-          python-version: ${{ matrix.python }}
+          activate-environment: test
+          channels: conda-forge
 
+      - name: List environment
+        run: conda list -n base
+      
       - name: Build conda package
         run: conda build --python ${{ matrix.python }} -c conda-forge --override-channels conda-recipe
 
