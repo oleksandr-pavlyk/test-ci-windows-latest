@@ -43,13 +43,17 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v3
         with:
           miniforge-version: latest
-          conda-build-version: "*"
           activate-environment: test
           channels: conda-forge
 
-      - name: List environment
-        run: conda list -n base
+      - name: Install conda build
+        run: |
+            conda activate
+            conda install -y conda-build
+            conda list -n base
       
       - name: Build conda package
-        run: conda build --python ${{ matrix.python }} -c conda-forge --override-channels conda-recipe
+        run: |
+            conda activate
+            conda build --python ${{ matrix.python }} -c conda-forge --override-channels conda-recipe
 
